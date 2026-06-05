@@ -1,0 +1,67 @@
+﻿@page
+@model MyShop.Pages.Admin.AddProductModel
+@{
+    ViewData["Title"] = "افزودن کالا";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">افزودن کالا</h2>
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label asp-for="Pro.Name" class="form-label">نام کالا</label>
+                <input asp-for="Pro.Name" class="form-control" />
+                <span asp-validation-for="Pro.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Pro.Description" class="form-label">توضیحات</label>
+                <textarea asp-for="Pro.Description" class="form-control"></textarea>
+                <span asp-validation-for="Pro.Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Pro.Price" class="form-label">قیمت</label>
+                <input asp-for="Pro.Price" type="number" class="form-control" />
+                <span asp-validation-for="Pro.Price" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Pro.Quantity" class="form-label">تعداد</label>
+                <input asp-for="Pro.Quantity" type="number" class="form-control" />
+                <span asp-validation-for="Pro.Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Pro.Picture" class="form-label">تصویر کالا</label>
+                <input asp-for="Pro.Picture" type="file" class="form-control" />
+                <span asp-validation-for="Pro.Picture" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">دسته‌بندی‌ها</label>
+                <span asp-validation-for="Pro.CategoriesId" class="text-danger"></span>
+                @foreach (var item in Model.Categories)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="Pro.CategoriesId"
+                               value="@item.Id"
+                               id="cat_@item.Id">
+
+                        <label class="form-check-label" for="cat_@item.Id">
+                            @item.Title
+                        </label>
+                    </div>
+                }
+            </div>
+
+
+            <button type="submit" class="btn btn-primary w-100">ثبت کالا</button>
+        </form>
+    </div>
+</div>

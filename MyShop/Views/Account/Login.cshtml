@@ -1,0 +1,62 @@
+﻿@model Models.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4" style="width: 400px;">
+
+        @if(User.Identity.IsAuthenticated)
+        {
+            <div class="alert  alert-danger">
+                شما ادمین نیستید
+            </div>
+        }
+
+        <h2 class="text-center mb-4">ورود</h2>
+        <hr />
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input asp-for="Email" class="form-control" placeholder="ایمیل خود را وارد کنید" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور را وارد کنید" />
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="RememberMe" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">
+                    @Html.DisplayNameFor(model => model.RememberMe)
+                </label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">ورود</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="text-decoration-none">بازگشت</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

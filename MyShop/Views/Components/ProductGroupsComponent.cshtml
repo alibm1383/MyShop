@@ -1,0 +1,63 @@
+﻿@using Models.Models
+@model IEnumerable<ShowGroupsViewModel>
+
+<style>
+    .group-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .group-item {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        border-radius: 10px;
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .group-item:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .group-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            .group-item a:hover {
+                color: #007bff;
+            }
+
+    .group-badge {
+        background: #007bff;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+
+<ul class="group-list">
+    @foreach (var item in Model)
+    {
+        <li class="group-item">
+            <a asp-controller="Product" asp-action="ShowProductByGroupId" asp-route-id="@item.GroupId" asp-route-name="@item.GroupTitle">
+                @item.GroupTitle
+            </a>
+            <span class="group-badge">@item.ProductsCount</span>
+        </li>
+    }
+</ul>

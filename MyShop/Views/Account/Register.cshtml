@@ -1,0 +1,74 @@
+﻿@model Models.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-gradient text-green text-center rounded-top">
+                    <h3 class="card-title mb-0">ثبت نام</h3>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Register" method="post" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- ایمیل -->
+                        <div class="form-group mb-4">
+                            <label asp-for="Email" class="form-label fs-5 fw-bold">ایمیل</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-primary text-white">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input asp-for="Email" class="form-control form-control-lg border-0 rounded-3 shadow-sm" placeholder="example@example.com" required />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <!-- رمز عبور -->
+                        <div class="form-group mb-4">
+                            <label asp-for="Password" class="form-label fs-5 fw-bold">رمز عبور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-primary text-white">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input asp-for="Password" type="password" class="form-control form-control-lg border-0 rounded-3 shadow-sm" placeholder="رمز عبور" required />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <!-- تکرار رمز عبور -->
+                        <div class="form-group mb-4">
+                            <label asp-for="RePassword" class="form-label fs-5 fw-bold">تکرار رمز عبور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-primary text-white">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input asp-for="RePassword" type="password" class="form-control form-control-lg border-0 rounded-3 shadow-sm" placeholder="تکرار رمز عبور" required />
+                            </div>
+                            <span asp-validation-for="RePassword" class="text-danger small"></span>
+                        </div>
+
+                        <!-- دکمه ثبت نام -->
+                        <div class="form-group text-center mb-4">
+                            <button type="submit" class="btn btn-success btn-lg w-100 shadow-lg rounded-pill border-0 transition-all hover-scale">
+                                <i class="fas fa-user-plus me-2"></i> ثبت نام
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center bg-light rounded-bottom">
+                    <a asp-action="Index" asp-controller="home" class="text-decoration-none text-primary fs-5">
+                        بازگشت به صفحه اصلی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

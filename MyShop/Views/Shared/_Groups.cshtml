@@ -1,0 +1,16 @@
+﻿@inject DataLayer.Repositories.GroupRepository GroupRepository
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        گروه ها
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        @foreach (var item in GroupRepository.GetAllCategories())
+        {
+            <a class="dropdown-item" asp-controller="Product" asp-action="ShowProductByGroupId" asp-route-id="@item.Id" asp-route-name="@item.Title">@item.Title</a>
+        }
+    </div>
+
+</li>

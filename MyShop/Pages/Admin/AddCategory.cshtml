@@ -1,0 +1,22 @@
+﻿@page
+@model MyShop.Pages.Admin.AddCategoryModel
+@{
+    ViewData["Title"] = "افزودن گروه";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">افزودن گروه</h2>
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label asp-for="Category.Title" class="form-label">نام گروه</label>
+                <input asp-for="Category.Title" class="form-control" />
+                <span asp-validation-for="Category.Title" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">ثبت گروه</button>
+        </form>
+    </div>
+</div>

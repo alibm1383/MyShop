@@ -1,0 +1,45 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "ShowCart";
+}
+
+@if(Model != null)
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>کالا</th>
+                <th>تعداد</th>
+                <th>فی</th>
+                <th>قیمت</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@item.Product.Title</td>
+                    <td>@item.Count</td>
+                    <td>@item.Price</td>
+                    <td>@(item.Price * item.Count)</td>
+                    <td>
+                        <a asp-action="RemoveCart" asp-controller="Home" asp-route-orderDetailId="@item.DetailId">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <h5>جمع کل : @Model.OrderDetails.Sum(o => o.Price * o.Count)</h5>
+
+
+}
+else
+{
+    <div class="alert alert-danger">
+        سبد خرید خالی است
+    </div>
+}

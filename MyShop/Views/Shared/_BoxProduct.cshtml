@@ -1,0 +1,44 @@
+﻿@model Product
+
+<div class="product-card">
+    <img src="/Images/@(Model.Id).jpg" class="product-image" />
+    <h5>@Model.Title</h5>
+    <p class="price">@Model.Price.ToString("N0") تومان</p>
+    <a class="btn btn-outline-primary" asp-action="Detail" asp-controller="Home" asp-route-id="@Model.Id">
+        مشاهده جزئیات
+    </a>
+</div>
+
+<style>
+    .product-card {
+        width: 250px;
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        text-align: center;
+    }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+    .product-image {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .btn-outline-primary {
+        border-radius: 20px;
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+</style>

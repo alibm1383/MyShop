@@ -1,0 +1,163 @@
+﻿@page
+@model MyShop.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "لیست کالاها";
+}
+
+<h1 class="page-title">📦 لیست کالاها</h1>
+
+
+<div class="product-stats">
+    <a asp-page="AddProduct" class="btn btn-primary">افزودن محصول</a>
+    <a asp-page="AddCategory" class="btn btn-success">افزودن گروه</a>
+    <span> تعداد کالاها : <strong>@Model.Products.Count()</strong></span>
+</div>
+
+<div class="product-grid">
+    @foreach (var item in Model.Products)
+    {
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="/Images/@(item.Id).jpg?v=@System.IO.File.GetLastWriteTime("wwwroot/images/"+item.Id+".jpg")" class="product-img" alt="@item.Title" />
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">@item.Title</h3>
+                <p class="product-price">@item.Price.ToString("N0") تومان</p>
+                <div class="product-actions">
+                    <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-warning">✏ ویرایش</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" onsubmit="return confirm('آیا از حذف این محصول مطمئن هستید؟');">
+                        <button type="submit" class="btn btn-danger">🗑 حذف</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<style>
+    /* استایل کلی صفحه */
+    .page-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+
+    /* بخش آمار و دکمه افزودن */
+    .product-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9f9f9;
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* شبکه محصولات */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    /* کارت محصول */
+    .product-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding-bottom: 10px;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+    /* تصویر محصول */
+    .product-img-container {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        overflow: hidden;
+    }
+
+    .product-img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    /* اطلاعات محصول */
+    .product-info {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .product-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .product-price {
+        color: #27ae60;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    /* دکمه‌ها */
+    .product-actions {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-warning {
+        background: #f39c12;
+        color: white;
+    }
+
+    .btn-danger {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+    }
+</style>
